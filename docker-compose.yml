@@ -12,7 +12,41 @@ services:
     networks:
       - jmeter-network
 
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    ports:
+      - "9003:2003"
+      - "9083:8083"
+      - "9086:8086"
+      - "9090:8090"
+    environment:
+      INFLUXDB_DATA_ENGINE: tsm1
+      INFLUXDB_GRAPHITE_ENABLED: 1
+      INFLUXDB_REPORTING_DISABLED: 0
+      ADMIN_USER: root
+      INFLUXDB_INIT_PWD: 1nfluxDB
+      PRE_CREATE_DB: jmeter
+    networks:
+      - jmeter-network
+    volumes:
+      # Data persistency
+      # sudo mkdir -p /srv/docker/influxdb/data
+      - /srv/docker/influxdb/data:/var/lib/influxdb
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    ports: 
+      - "9001:3000"
+    environment:
+      GF_INSTALL_PLUGINS: grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
+    command: curl 'http://localhost:3000/api/datasources' -X PUT --data-binary '{"name":"jmeter","type":"influxdb_08","url":"http://localhost:9086","access":"proxy","isDefault":true,"database":"jmeter","user":"root","password":"1nfluxDB"}'
+    networks:
+      - jmeter-network
+
 networks:
   jmeter-network:
     driver: bridge
+
 
