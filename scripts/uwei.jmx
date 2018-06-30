@@ -17,24 +17,14 @@
             <stringProp name="Argument.value">147258369</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="counter" elementType="Argument">
-            <stringProp name="Argument.name">counter</stringProp>
-            <stringProp name="Argument.value">${__UUID}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="emailDomain" elementType="Argument">
             <stringProp name="Argument.name">emailDomain</stringProp>
-            <stringProp name="Argument.value">@asdat.org</stringProp>
+            <stringProp name="Argument.value">@test.com</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="namePrefix" elementType="Argument">
-            <stringProp name="Argument.name">namePrefix</stringProp>
-            <stringProp name="Argument.value">first</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="lastNamePrefix" elementType="Argument">
-            <stringProp name="Argument.name">lastNamePrefix</stringProp>
-            <stringProp name="Argument.value">last</stringProp>
+          <elementProp name="timestamp" elementType="Argument">
+            <stringProp name="Argument.name">timestamp</stringProp>
+            <stringProp name="Argument.value">${__time(,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -42,17 +32,17 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script">String emailDomain = vars.get(&quot;emailDomain&quot;);
-String namePrefix = vars.get(&quot;namePrefix&quot;);
-String lastNamePrefix = vars.get(&quot;lastNamePrefix&quot;);
-vars.put(&quot;newEmail&quot;, counter + &quot;.&quot; + emailDomain);
-vars.put(&quot;firstName&quot;, namePrefix + &quot;.&quot; + counter);
-vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</stringProp>
-      </BeanShellPreProcessor>
+      <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
+        <collectionProp name="AuthManager.auth_list">
+          <elementProp name="" elementType="Authorization">
+            <stringProp name="Authorization.url">http://dev.uvey.space</stringProp>
+            <stringProp name="Authorization.username">test</stringProp>
+            <stringProp name="Authorization.password">testing</stringProp>
+            <stringProp name="Authorization.domain"></stringProp>
+            <stringProp name="Authorization.realm"></stringProp>
+          </elementProp>
+        </collectionProp>
+      </AuthManager>
       <hashTree/>
       <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -68,18 +58,6 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
-        <collectionProp name="AuthManager.auth_list">
-          <elementProp name="" elementType="Authorization">
-            <stringProp name="Authorization.url">http://dev.uvey.space</stringProp>
-            <stringProp name="Authorization.username">test</stringProp>
-            <stringProp name="Authorization.password">testing</stringProp>
-            <stringProp name="Authorization.domain"></stringProp>
-            <stringProp name="Authorization.realm"></stringProp>
-          </elementProp>
-        </collectionProp>
-      </AuthManager>
-      <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="ui" elementType="Argument">
@@ -89,7 +67,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
           </elementProp>
           <elementProp name="requestsCount" elementType="Argument">
             <stringProp name="Argument.name">requestsCount</stringProp>
-            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -127,12 +105,10 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
       <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
         <collectionProp name="UserParameters.names">
           <stringProp name="3005864">auth</stringProp>
-          <stringProp name="-690213213">register</stringProp>
         </collectionProp>
         <collectionProp name="UserParameters.thread_values">
-          <collectionProp name="84676427">
+          <collectionProp name="-731712904">
             <stringProp name="-843572606">{&quot;email&quot;:&quot;${email}&quot;,&quot;password&quot;:&quot;${password}&quot;}</stringProp>
-            <stringProp name="838803842">{&quot;email&quot;:&quot;${newEmail}&quot;,&quot;password&quot;:&quot;${password}&quot;,&quot;first_name&quot;:&quot;${firstName}&quot;,&quot;last_name&quot;:&quot;${lastName}&quot;}</stringProp>
           </collectionProp>
         </collectionProp>
         <boolProp name="UserParameters.per_iteration">true</boolProp>
@@ -151,45 +127,13 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="friendId" elementType="Argument">
-              <stringProp name="Argument.name">friendId</stringProp>
-              <stringProp name="Argument.value">59ee8709bfefd60dd9c913dd</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
-        <hashTree/>
-        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
-          <collectionProp name="UserParameters.names">
-            <stringProp name="615586497">getUserDetails</stringProp>
-            <stringProp name="-704908783">friendRequest</stringProp>
-            <stringProp name="-875018709">getUserInformation</stringProp>
-          </collectionProp>
-          <collectionProp name="UserParameters.thread_values">
-            <collectionProp name="-332766532">
-              <stringProp name="1280303552">/api/user/details/${friendId}</stringProp>
-              <stringProp name="1711961171">{&quot;friend_id&quot;:&quot;${friendId}&quot;}</stringProp>
-              <stringProp name="-671475067">/api/card/user/${friendId}/0</stringProp>
-            </collectionProp>
-          </collectionProp>
-          <boolProp name="UserParameters.per_iteration">true</boolProp>
-        </UserParameters>
-        <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create user" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${register}</stringProp>
+                <stringProp name="Argument.value">{&quot;email&quot;:&quot;${__UUID}@test.com&quot;,&quot;password&quot;:&quot;${password}&quot;,&quot;first_name&quot;:&quot;first-${__UUID}&quot;,&quot;last_name&quot;:&quot;&apos;last--${__UUID}&quot;}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -269,18 +213,6 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Get token" enabled="true">
-            <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
-            <stringProp name="JSONPostProcessor.jsonPathExprs">$.payload.token</stringProp>
-            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
-          </JSONPostProcessor>
-          <hashTree/>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Get random friend" enabled="true">
-            <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
-            <stringProp name="JSONPostProcessor.jsonPathExprs">$.payload.token</stringProp>
-            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
-          </JSONPostProcessor>
-          <hashTree/>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
             <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
           </SampleTimeout>
@@ -303,6 +235,79 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <boolProp name="ISREGEX">true</boolProp>
           </JSONPathAssertion>
           <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check token" enabled="true">
+            <stringProp name="JSON_PATH">$.payload.token</stringProp>
+            <stringProp name="EXPECTED_VALUE"></stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Get token" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.payload.token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET state" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/api/state?</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
+            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+          </SampleTimeout>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check message" enabled="true">
+            <stringProp name="JSON_PATH">$.message</stringProp>
+            <stringProp name="EXPECTED_VALUE">SUCCESS</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check status" enabled="true">
+            <stringProp name="JSON_PATH">$.status</stringProp>
+            <stringProp name="EXPECTED_VALUE">200</stringProp>
+            <boolProp name="JSONVALIDATION">true</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check token" enabled="true">
+            <stringProp name="JSON_PATH">$.payload.token</stringProp>
+            <stringProp name="EXPECTED_VALUE"></stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Get friend" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">friend</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.payload.user.friends[0:]</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET user details" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -312,7 +317,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${getUserDetails}</stringProp>
+          <stringProp name="HTTPSampler.path">/api/user/details/${friend}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -335,7 +340,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${friendRequest}</stringProp>
+                <stringProp name="Argument.value">{&quot;friend_id&quot;:&quot;${friend}&quot;}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -376,7 +381,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${getUserInformation}</stringProp>
+          <stringProp name="HTTPSampler.path">/api/card/user/${friend}/0</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -393,6 +398,48 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
           </SampleTimeout>
           <hashTree/>
         </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Chat" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -620,6 +667,18 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
             <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="ThinkTime1s" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="URT" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100.0</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
       </hashTree>
@@ -1047,7 +1106,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">results/${__time(,)}/tree.xml</stringProp>
+        <stringProp name="filename">report/${timestamp}/tree.xml</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -1083,7 +1142,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">results/${__time(,)}/graph</stringProp>
+        <stringProp name="filename">report/${timestamp}/graph.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
@@ -1119,7 +1178,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">results/${__time(,)}/time</stringProp>
+        <stringProp name="filename">report/${timestamp}/time.csv</stringProp>
         <stringProp name="RespTimeGraph.interval">1000</stringProp>
       </ResultCollector>
       <hashTree/>
@@ -1159,7 +1218,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">results/${__time(,)}/aggregate</stringProp>
+        <stringProp name="filename">report/${timestamp}/aggregate.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
@@ -1195,7 +1254,7 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">results/${__time(,)}/summary</stringProp>
+        <stringProp name="filename">report/${timestamp}/summary.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
@@ -1231,17 +1290,17 @@ vars.put(&quot;lastName&quot;, lastNamePrefix + &quot;.&quot; + counter);</strin
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">results/${__time(,)}/report.xml</stringProp>
+        <stringProp name="filename">report/${timestamp}/report.xml</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-        <stringProp name="FileSaver.filename"></stringProp>
+        <stringProp name="FileSaver.filename">report/${timestamp}/response-</stringProp>
         <boolProp name="FileSaver.errorsonly">false</boolProp>
         <boolProp name="FileSaver.skipautonumber">false</boolProp>
         <boolProp name="FileSaver.skipsuffix">false</boolProp>
         <boolProp name="FileSaver.successonly">false</boolProp>
-        <stringProp name="FileSaver.variablename">results/${__time(,)}/responses</stringProp>
         <boolProp name="FileSaver.addTimstamp">true</boolProp>
+        <stringProp name="FileSaver.variablename">file-</stringProp>
       </ResultSaver>
       <hashTree/>
     </hashTree>

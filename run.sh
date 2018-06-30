@@ -15,6 +15,7 @@ for filename in scripts/*.jmx; do
     eval "docker cp $filename jmeter-master:$WDIR/scripts/"
     eval "docker exec -it jmeter-master /bin/bash -c 'rm -rf $NAME && mkdir $NAME && cd $NAME && ../bin/jmeter -n -t ../$filename -l $WDIR/$NAME/report.jtl'"
     eval "docker cp jmeter-master:$WDIR/$NAME results/"
+    eval "docker cp jmeter-master:$WDIR/$NAME/report.jtl results/"
 done
 
 docker-compose stop
