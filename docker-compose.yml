@@ -32,16 +32,17 @@ services:
     volumes:
       # Data persistency
       # sudo mkdir -p /srv/docker/influxdb/data
-      - /srv/docker/influxdb/data:/var/lib/influxdb
+      - "./data/influxdb:/var/lib/influxdb"
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
     restart: always
     ports: 
       - "9001:3000"
+      - "9200:9200"
     environment:
+      GF_SERVER_ROOT_URL: http://127.0.0.1
       GF_INSTALL_PLUGINS: grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
-    command: curl 'http://localhost:3000/api/datasources' -X PUT --data-binary '{"name":"jmeter","type":"influxdb_08","url":"http://localhost:9086","access":"proxy","isDefault":true,"database":"jmeter","user":"root","password":"1nfluxDB"}'
     networks:
       - jmeter-network
 
