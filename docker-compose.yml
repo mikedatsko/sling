@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  master:
+    build: ./jmeter-master
+    container_name: jmeter-master
+    tty: true # tty true make the docker image stay up even with nothing running
+    networks:
+      - jmeter-network
+  slave:
+    build: ./jmeter-slave
+    networks:
+      - jmeter-network
+
+networks:
+  jmeter-network:
+    driver: bridge
+
