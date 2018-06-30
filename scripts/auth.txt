@@ -1,0 +1,2 @@
+# JMeter generated Authorization file
+http://dev.uvey.space	test	testing			BASIC_DIGEST
