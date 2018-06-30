@@ -1,13 +1,15 @@
-# Prepare
+## Pre-build
 
-run `sh run.sh` to build containers with jmeter 4.0
+run `sh build.sh 1` to build containers with jmeter 4.0, grafana and 1 slave for jmeter
 
-# Run tests
+## Run tests
 
 Add `*.jmx` templates to scripts dir
 
 run `sh run.sh` start builds
 
-# Add more slaves
+results will be saved to a new directory `results` grouped by date
 
-set COUNT in run.sh to needed amount
+## Destroy
+
+run `sh destroy.sh`
