@@ -1,0 +1,6 @@
+FROM kapacitor
+
+EXPOSE 9092
+
+ENV KAPACITOR_HOSTNAME kapacitor
+ENV KAPACITOR_INFLUXDB_0_URLS_0 http://influxdb:8086
