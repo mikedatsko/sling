@@ -22,14 +22,24 @@
             <stringProp name="Argument.value">@test.com</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="timestamp1" elementType="Argument">
-            <stringProp name="Argument.name">timestamp1</stringProp>
-            <stringProp name="Argument.value">${__time(,)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="timestamp" elementType="Argument">
             <stringProp name="Argument.name">timestamp</stringProp>
             <stringProp name="Argument.value">${__time(yyyy-MM-dd_hh:mm:ss,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="randomMin" elementType="Argument">
+            <stringProp name="Argument.name">randomMin</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="randomMax" elementType="Argument">
+            <stringProp name="Argument.name">randomMax</stringProp>
+            <stringProp name="Argument.value">3000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="requestsCount" elementType="Argument">
+            <stringProp name="Argument.name">requestsCount</stringProp>
+            <stringProp name="Argument.value">5</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -68,11 +78,6 @@
           <elementProp name="ui" elementType="Argument">
             <stringProp name="Argument.name">ui</stringProp>
             <stringProp name="Argument.value">http://dev.uvey.space</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="requestsCount" elementType="Argument">
-            <stringProp name="Argument.name">requestsCount</stringProp>
-            <stringProp name="Argument.value">2</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -116,7 +121,7 @@
             <stringProp name="-843572606">{&quot;email&quot;:&quot;${email}&quot;,&quot;password&quot;:&quot;${password}&quot;}</stringProp>
           </collectionProp>
         </collectionProp>
-        <boolProp name="UserParameters.per_iteration">true</boolProp>
+        <boolProp name="UserParameters.per_iteration">false</boolProp>
       </UserParameters>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="User" enabled="true">
@@ -160,7 +165,7 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
           <hashTree/>
           <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check message" enabled="true">
@@ -191,6 +196,18 @@
           </JSONPathAssertion>
           <hashTree/>
         </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Auth user" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -219,7 +236,7 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
           <hashTree/>
           <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check message" enabled="true">
@@ -256,6 +273,30 @@
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET state" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -276,10 +317,6 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
-          </SampleTimeout>
-          <hashTree/>
           <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check message" enabled="true">
             <stringProp name="JSON_PATH">$.message</stringProp>
             <stringProp name="EXPECTED_VALUE">SUCCESS</stringProp>
@@ -313,6 +350,22 @@
             <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
           </JSONPostProcessor>
           <hashTree/>
+          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
+          </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET user details" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -335,8 +388,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST friendship request" enabled="true">
@@ -367,8 +432,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET user information" enabled="true">
@@ -399,8 +476,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
@@ -409,6 +498,18 @@
           <boolProp name="displaySystemProperties">false</boolProp>
         </DebugSampler>
         <hashTree/>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -520,6 +621,22 @@
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
           </JSONPostProcessor>
           <hashTree/>
+          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
+          </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET all chats" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -549,8 +666,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET chat" enabled="true">
@@ -581,8 +710,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET chat messages" enabled="true">
@@ -606,8 +747,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET chat messages PUT" enabled="true">
@@ -638,8 +791,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST message to chat" enabled="true">
@@ -670,19 +835,19 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
           <hashTree/>
         </hashTree>
-        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="ThinkTime1s" enabled="true">
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
           <intProp name="ActionProcessor.action">1</intProp>
           <intProp name="ActionProcessor.target">0</intProp>
           <stringProp name="ActionProcessor.duration">0</stringProp>
         </TestAction>
         <hashTree>
-          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="URT" enabled="true">
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
             <stringProp name="ConstantTimer.delay">1000</stringProp>
-            <stringProp name="RandomTimer.range">100.0</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
@@ -755,6 +920,22 @@
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
           </JSONPostProcessor>
           <hashTree/>
+          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
+          </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET stream" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -777,8 +958,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET stream item" enabled="true">
@@ -808,10 +1001,6 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
-          </SampleTimeout>
-          <hashTree/>
           <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="Check message" enabled="true">
             <stringProp name="JSON_PATH">$.message</stringProp>
             <stringProp name="EXPECTED_VALUE">SUCCESS</stringProp>
@@ -829,6 +1018,22 @@
             <boolProp name="INVERT">false</boolProp>
             <boolProp name="ISREGEX">true</boolProp>
           </JSONPathAssertion>
+          <hashTree/>
+          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
+          </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST stream item" enabled="true">
@@ -859,8 +1064,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST comment to stream item" enabled="true">
@@ -891,8 +1108,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
       </hashTree>
@@ -946,6 +1175,22 @@
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
           </JSONPostProcessor>
           <hashTree/>
+          <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
+          </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET blog first" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -975,8 +1220,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST blog page" enabled="true">
@@ -1007,8 +1264,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET blog first" enabled="true">
@@ -1039,8 +1308,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET blog second" enabled="true">
@@ -1071,8 +1352,20 @@
         </HTTPSamplerProxy>
         <hashTree>
           <SampleTimeout guiclass="SampleTimeoutGui" testclass="SampleTimeout" testname="Random timeout" enabled="true">
-            <stringProp name="InterruptTimer.timeout">${__Random(500,3000,)</stringProp>
+            <stringProp name="InterruptTimer.timeout">${__Random(${randomMin},${randomMax},)}</stringProp>
           </SampleTimeout>
+          <hashTree/>
+        </hashTree>
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+          <intProp name="ActionProcessor.action">1</intProp>
+          <intProp name="ActionProcessor.target">0</intProp>
+          <stringProp name="ActionProcessor.duration">0</stringProp>
+        </TestAction>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+            <stringProp name="RandomTimer.range">100</stringProp>
+          </UniformRandomTimer>
           <hashTree/>
         </hashTree>
       </hashTree>
@@ -1111,7 +1404,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">report/${timestamp}/tree.xml</stringProp>
+        <stringProp name="filename">report/${timestamp}/report.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -1147,7 +1440,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">report/${timestamp}/graph.csv</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
@@ -1183,7 +1476,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">report/${timestamp}/time.csv</stringProp>
+        <stringProp name="filename"></stringProp>
         <stringProp name="RespTimeGraph.interval">1000</stringProp>
       </ResultCollector>
       <hashTree/>
@@ -1223,7 +1516,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">report/${timestamp}/aggregate.csv</stringProp>
+        <stringProp name="filename">report/${timestamp}/agregate.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
@@ -1259,7 +1552,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">report/${timestamp}/summary.csv</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
@@ -1295,7 +1588,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">report/${timestamp}/report.xml</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
@@ -1318,12 +1611,12 @@
             </elementProp>
             <elementProp name="influxdbUrl" elementType="Argument">
               <stringProp name="Argument.name">influxdbUrl</stringProp>
-              <stringProp name="Argument.value">http://localhost:9086/write?db=jmeter</stringProp>
+              <stringProp name="Argument.value">http://influxdb:8086/write?db=jmeter</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="application" elementType="Argument">
               <stringProp name="Argument.name">application</stringProp>
-              <stringProp name="Argument.value">application name</stringProp>
+              <stringProp name="Argument.value">Uvey-API</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="measurement" elementType="Argument">
@@ -1354,6 +1647,11 @@
             <elementProp name="eventTags" elementType="Argument">
               <stringProp name="Argument.name">eventTags</stringProp>
               <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="influxdbUrlv" elementType="Argument">
+              <stringProp name="Argument.name">influxdbUrlv</stringProp>
+              <stringProp name="Argument.value">http://127.0.0.1:9086/write?db=jmeter</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
           </collectionProp>
