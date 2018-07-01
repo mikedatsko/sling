@@ -16,8 +16,7 @@ services:
   influxdb:
     build: ./influxdb
     container_name: influxdb
-    ports:
-      - "9086:8086"
+    restart: always
     networks:
       - monitor-network
     volumes:
