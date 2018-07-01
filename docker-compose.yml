@@ -6,48 +6,60 @@ services:
     container_name: jmeter-master
     tty: true # tty true make the docker image stay up even with nothing running
     networks:
-      - jmeter-network
+      - monitor-network
+
   slave:
     build: ./jmeter-slave
     networks:
-      - jmeter-network
+      - monitor-network
 
   influxdb:
-    image: influxdb:latest
+    build: ./influxdb
     container_name: influxdb
     ports:
-      - "9003:2003"
-      - "9083:8083"
       - "9086:8086"
-      - "9090:8090"
-    environment:
-      INFLUXDB_DATA_ENGINE: tsm1
-      INFLUXDB_GRAPHITE_ENABLED: 1
-      INFLUXDB_REPORTING_DISABLED: 0
-      ADMIN_USER: root
-      INFLUXDB_INIT_PWD: 1nfluxDB
-      PRE_CREATE_DB: jmeter
     networks:
-      - jmeter-network
+      - monitor-network
     volumes:
-      # Data persistency
-      # sudo mkdir -p /srv/docker/influxdb/data
-      - "./data/influxdb:/var/lib/influxdb"
+      - ./data/influxdb:/var/lib/influxdb
+
+  chronograf:
+    build: ./chronograf
+    container_name: chronograf
+    ports:
+      - "9088:8888"
+    networks:
+      - monitor-network
+    links:
+      - influxdb
+    volumes:
+      - ./data/chronograf:/var/lib/chronograf
+
+  kapacitor:
+    build: ./kapacitor
+    container_name: kapacitor
+    ports:
+      - "9092:9092"
+    networks:
+      - monitor-network
+    links:
+      - influxdb
+    volumes:
+      - ./data/kapacitor:/var/lib/kapacitor
+
   grafana:
-    image: grafana/grafana:latest
+    build: ./grafana
     container_name: grafana
     restart: always
     ports: 
       - "9001:3000"
-      - "9200:9200"
-    environment:
-      GF_SERVER_ROOT_URL: http://127.0.0.1
-      GF_INSTALL_PLUGINS: grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
     networks:
-      - jmeter-network
+      - monitor-network
+    links:
+      - influxdb
 
 networks:
-  jmeter-network:
+  monitor-network:
     driver: bridge
 
 
