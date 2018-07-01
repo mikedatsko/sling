@@ -1,1 +1,1 @@
-{"name":"jmeter","type":"influxdb","url":"http://127.0.0.1:9086","access":"proxy","jsonData":{"keepCookies":[]},"secureJsonFields":{},"database":"jmeter","user":"root","password":"1nfluxDB"}
+{"name":"jmeter","type":"influxdb","url":"http://influxdb:8086","access":"proxy","jsonData":{"keepCookies":[]},"secureJsonFields":{},"database":"jmeter","user":"root","password":"root"}
