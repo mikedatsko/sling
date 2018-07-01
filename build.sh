@@ -12,6 +12,5 @@ sleep 30
 echo "add grafana datasource and dashboards"
 
 curl --user admin:admin -d @grafana/influxdb-source.json -H "Content-Type: application/json" -X POST "http://127.0.0.1:9001/api/datasources"
-curl --user admin:admin -d @grafana/jmeter-dashboard.json -H "Content-Type: application/json" -X POST "http://127.0.0.1:9001/api/dashboards/import"
-curl --user admin:admin -d @grafana/influxdb-1138.json -H "Content-Type: application/json" -X POST "http://127.0.0.1:9001/api/dashboards/import"
-curl --user admin:admin -d @grafana/influxdb-base-metrics.json -H "Content-Type: application/json" -X POST "http://127.0.0.1:9001/api/dashboards/import"
+curl --user admin:admin -d @grafana/jmeter-influxdb-dashboard.json -H "Content-Type: application/json" -X POST "http://127.0.0.1:9001/api/dashboards/import"
+
