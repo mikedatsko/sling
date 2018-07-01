@@ -39,7 +39,7 @@
           </elementProp>
           <elementProp name="requestsCount" elementType="Argument">
             <stringProp name="Argument.name">requestsCount</stringProp>
-            <stringProp name="Argument.value">20</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ui" elementType="Argument">
@@ -996,10 +996,6 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-          <collectionProp name="Arguments.arguments"/>
-        </Arguments>
-        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Auth user" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -1463,7 +1459,7 @@
             </elementProp>
             <elementProp name="summaryOnly" elementType="Argument">
               <stringProp name="Argument.name">summaryOnly</stringProp>
-              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.value">false</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="samplersRegex" elementType="Argument">
@@ -1473,12 +1469,12 @@
             </elementProp>
             <elementProp name="percentiles" elementType="Argument">
               <stringProp name="Argument.name">percentiles</stringProp>
-              <stringProp name="Argument.value">90;95;99</stringProp>
+              <stringProp name="Argument.value">50;90;95;99</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="testTitle" elementType="Argument">
               <stringProp name="Argument.name">testTitle</stringProp>
-              <stringProp name="Argument.value">Test name</stringProp>
+              <stringProp name="Argument.value">${__TestPlanName}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="eventTags" elementType="Argument">
