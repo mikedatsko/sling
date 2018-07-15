@@ -5,6 +5,7 @@ EXPOSE 3000
 ENV GF_SERVER_ROOT_URL http://127.0.0.1
 ENV GF_INSTALL_PLUGINS grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
 ENV GF_AUTH_ANONYMOUS_ENABLED true
+ENV GF_USERS_DEFAULT_THEME light
 
 #COPY . /grafana
 
