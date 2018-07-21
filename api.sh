@@ -4,7 +4,7 @@ SLAVE_IP=$(docker inspect -f '{{.Name}} {{range .NetworkSettings.Networks}}{{.IP
 WDIR=`docker exec -it jmeter-master /bin/pwd | tr -d '\r'`
 rm -rf results
 mkdir -p results
-filename="templates/performance.jmx"
+filename="templates/api.jmx"
 NAME=$(basename $filename)
 NAME="${NAME%.*}"
 eval "docker cp $filename jmeter-master:$WDIR/scripts/"
